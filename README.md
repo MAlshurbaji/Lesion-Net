@@ -52,10 +52,3 @@ After setting the parameters in `config/config_train.yaml`, run the following co
 python train.py
 python evaluate.py
 ```
-
-%## Citation
-%If you find this work useful, please consider citing:
-
-%## Acknowledgements
-%Parts of this implementation build upon components from [SSL4MIS](https://github.com/HiLab-git/SSL4MIS). We thank the authors for making their work publicly available.
-
