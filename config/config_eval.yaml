@@ -1,0 +1,38 @@
+experiment:
+  name: isles22_ex01
+  output_dir: exps/isles22_ex01
+  seed: 42
+
+data:
+  dwi_dir: data/isles22/2d_data/images
+  mask_dir: data/isles22/2d_data/labels
+  split_train: train
+  split_val: test
+
+training:
+  batch_size: 32
+  epochs: 300
+  lr: 5.0e-5
+  threshold: 0.5
+
+model:
+  name: LesionNet
+  in_channels: 1    # DWI only
+  num_classes: 1    # Binary segmentation
+  widths: [128, 128, 128, 128]
+  depths: [25, 17, 14, 10]
+  all_num_heads: [4, 4, 4, 4]
+  patch_sizes: [3, 3, 3, 3]
+  overlap_sizes: [2, 2, 2, 2]
+  reduction_ratios: [8, 4, 2, 1]
+  mlp_expansions: [4, 4, 4, 4]
+  decoder_channels: 256
+  scale_factors: [16, 8, 4, 2]
+  drop_prob: 0.4
+  image_size: [128, 128]
+
+system:
+  device: cuda:0
+  num_workers: 4
+  pin_memory: true
+  amp: false
