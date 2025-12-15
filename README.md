@@ -1,5 +1,4 @@
 # Lesion-Net: Small Lesion Segmentation in Acute Ischemic Stroke
-Code for "Lesion-Net: Small Lesion Segmentation in Acute Ischemic Stroke"
 
 ![Framework](figures/framework.png)
 
@@ -8,7 +7,7 @@ Code for "Lesion-Net: Small Lesion Segmentation in Acute Ischemic Stroke"
 **Release date:** 16/Dec/2025
 
 ## Abstract
-This repository implements Lesion-Net, an attention-based segmentation model designed to improve small lesion detection in acute ischemic stroke MRI. The network emphasizes high-resolution features through reduced down-sampling, deeper early encoder stages, and uniform channel widths, enabling better preservation of fine lesion details. Lesion-Net achieves state-of-the-art performance on the ISLES 2022 and JHUS datasets and includes ablation studies demonstrating the impact of each architectural component.
+Accurate segmentation of acute ischemic stroke in MRI remains a significant challenge due to the presence of small and subtle lesions. Lesion-Net is an attention-based segmentation model designed for accurate small-lesion segmentation in brain MRI, with a focus on acute ischemic stroke. The architecture features a hierarchical encoder, lightweight decoder, and fusion-based segmentation head, with reduced spatial down-sampling and enhanced shallow-layer capacity to preserve fine lesion details. By prioritizing high-resolution features and uniform channel widths, Lesion-Net improves sensitivity to small lesions commonly missed by conventional designs. Experiments on ISLES 2022 and JHUS demonstrate strong performance and robustness in highly imbalanced small-lesion scenarios.
 
 ## Usage
 
@@ -23,9 +22,9 @@ pip install -r requirements.txt
 ```
 
 ### Datasets
-ISLES-2022 dataset can be downloaded from [Kaggle](https://www.kaggle.com/datasets/orvile/isles-2022-brain-stoke-dataset), 
+The ISLES 2022 dataset is publicly available and can be downloaded from [Kaggle](https://www.kaggle.com/datasets/orvile/isles-2022-brain-stoke-dataset). In contrast, the JHUS dataset is a restricted resource and can only be accessed through a formal data request submitted to [ICPSR](https://www.icpsr.umich.edu/web/ICPSR/studies/38464).
 
-After placing the downloaded 3D volumes in `data/DATASET/3d_data/`, generate 2D slices and patient-wise train/val/test splits using:
+After placing the downloaded 3D volumes in `data/isles22/3d_data/`, generate 2D slices and patient-wise train/val/test splits using:
 ```bash
 python make_dataset.py
 ```
@@ -52,3 +51,12 @@ After setting the parameters in `config/config_train.yaml`, run the following co
 python train.py
 python evaluate.py
 ```
+
+<!--
+## Citation
+If you find this work useful, please consider citing:
+
+```bibtex
+
+```
+-->
