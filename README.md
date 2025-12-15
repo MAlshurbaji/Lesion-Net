@@ -4,7 +4,7 @@
 
 > This is an official implementation of [Lesion-Net: Small Lesion Segmentation in Acute Ischemic Stroke]() <br>
 
-**Release date:** 16/Dec/2025
+**Release date:** 15/Dec/2025
 
 ## Abstract
 Accurate segmentation of acute ischemic stroke in MRI remains a significant challenge due to the presence of small and subtle lesions. Lesion-Net is an attention-based segmentation model designed for accurate small-lesion segmentation in brain MRI, with a focus on acute ischemic stroke. The architecture features a hierarchical encoder, lightweight decoder, and fusion-based segmentation head, with reduced spatial down-sampling and enhanced shallow-layer capacity to preserve fine lesion details. By prioritizing high-resolution features and uniform channel widths, Lesion-Net improves sensitivity to small lesions commonly missed by conventional designs. Experiments on ISLES 2022 and JHUS demonstrate strong performance and robustness in highly imbalanced small-lesion scenarios.
