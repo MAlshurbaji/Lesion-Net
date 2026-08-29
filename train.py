@@ -215,11 +215,7 @@ def evaluate_3d_metrics(
             [gt_slices.get(i, ref_zero) for i in range(max_slice + 1)], axis=0
         )
 
-        score_map = np.zeros((2,) + pred_stack.shape, dtype=np.float32)
-        score_map[1] = pred_stack.astype(np.float32)
-        score_map[0] = 1.0 - score_map[1]
-
-        pred_3d = test_single_case(score_map)
+        pred_3d = pred_stack.astype(np.uint8)
         gt_3d = gt_stack.astype(np.uint8)
 
         dice, jc, hd, asd = calculate_metric_percase(pred_3d, gt_3d)
