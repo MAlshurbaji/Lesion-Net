@@ -71,17 +71,27 @@ class DynamicSelfAttention(nn.Module):
 # ============================================================
 class MixFFN(nn.Sequential):
     def __init__(self, channels: int, expansion: int = 4):
+        hidden_channels = channels * expansion
+
         super().__init__(
-            nn.Conv2d(channels, channels, kernel_size=1),
             nn.Conv2d(
                 channels,
-                channels * expansion,
+                hidden_channels,
+                kernel_size=1,
+            ),
+            nn.Conv2d(
+                hidden_channels,
+                hidden_channels,
                 kernel_size=3,
                 padding=1,
-                groups=channels,
+                groups=hidden_channels,
             ),
             nn.GELU(),
-            nn.Conv2d(channels * expansion, channels, kernel_size=1),
+            nn.Conv2d(
+                hidden_channels,
+                channels,
+                kernel_size=1,
+            ),
         )
 
 
