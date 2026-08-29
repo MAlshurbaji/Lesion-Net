@@ -144,7 +144,7 @@ def train_one_epoch(epoch, model, optimizer, train_loader, device, logger):
 
         optimizer.zero_grad()
         outputs = model(images)
-        loss = dice_bce_loss(torch.sigmoid(outputs), masks)
+        loss = dice_bce_loss(outputs, masks)
         loss.backward()
         optimizer.step()
 
