@@ -8,17 +8,52 @@ def test_single_case(score_map):
     label_map = np.argmax(score_map, axis=0)
     return label_map
 
-def calculate_metric_percase(pred, gt):
+from medpy import metric
+import numpy as np
+
+
+def calculate_metric_percase(pred, gt, voxelspacing=None):
     """
-    Computes 3D evaluation metrics using medpy on binary volumes.
+    Computes case-wise 3D binary segmentation metrics.
+
+    When exactly one mask is empty, HD95 and ASD are assigned
+    the spatial diagonal of the evaluated volume.
     """
-    if np.sum(gt) == 0 and np.sum(pred) == 0:
+    pred = np.asarray(pred, dtype=bool)
+    gt = np.asarray(gt, dtype=bool)
+
+    if pred.shape != gt.shape:
+        raise ValueError(
+            f"Shape mismatch: pred={pred.shape}, gt={gt.shape}"
+        )
+
+    pred_empty = not np.any(pred)
+    gt_empty = not np.any(gt)
+
+    if pred_empty and gt_empty:
         return 1.0, 1.0, 0.0, 0.0
-    elif np.sum(gt) == 0 or np.sum(pred) == 0:
-        return 0.0, 0.0, 0.0, 0.0
-    else:
-        dice = metric.binary.dc(pred, gt)
-        jc = metric.binary.jc(pred, gt)
-        hd = metric.binary.hd95(pred, gt)
-        asd = metric.binary.asd(pred, gt)
-        return dice, jc, hd, asd
+
+    if pred_empty or gt_empty:
+        extent = np.asarray(gt.shape, dtype=np.float64) - 1.0
+
+        if voxelspacing is not None:
+            spacing = np.asarray(voxelspacing, dtype=np.float64)
+            extent = extent * spacing
+
+        maximum_distance = float(np.linalg.norm(extent))
+        return 0.0, 0.0, maximum_distance, maximum_distance
+
+    dice = metric.binary.dc(pred, gt)
+    iou = metric.binary.jc(pred, gt)
+    hd95 = metric.binary.hd95(
+        pred,
+        gt,
+        voxelspacing=voxelspacing,
+    )
+    asd = metric.binary.assd(
+        pred,
+        gt,
+        voxelspacing=voxelspacing,
+    )
+
+    return dice, iou, hd95, asd
