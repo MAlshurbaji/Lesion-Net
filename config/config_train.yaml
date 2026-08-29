@@ -10,9 +10,9 @@ data:
   split_val: val
 
 training:
-  batch_size: 32
-  epochs: 300
-  lr: 5.0e-5
+  batch_size: 16
+  epochs: 200
+  lr: 5.0e-4
   threshold: 0.5
 
 model:
