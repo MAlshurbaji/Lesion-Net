@@ -1,13 +1,13 @@
-# Lesion-Net: Small Lesion Segmentation in Acute Ischemic Stroke
+# Lesion-Net: A Lesion-Oriented Hierarchical Transformer for Ischemic Stroke Segmentation in DWI
 
 ![Framework](figures/framework.png)
 
-> This is an official implementation of [Lesion-Net: Small Lesion Segmentation in Acute Ischemic Stroke]() <br>
+> This is an official implementation of [Lesion-Net: A Lesion-Oriented Hierarchical Transformer for Ischemic Stroke Segmentation in DWI]() <br>
 
 **Release date:** 15/Dec/2025
 
 ## Abstract
-Accurate segmentation of acute ischemic stroke in MRI remains a significant challenge due to the presence of small and subtle lesions. Lesion-Net is an attention-based segmentation model designed for accurate small-lesion segmentation in brain MRI, with a focus on acute ischemic stroke. The architecture features a hierarchical encoder, lightweight decoder, and fusion-based segmentation head, with reduced spatial down-sampling and enhanced shallow-layer capacity to preserve fine lesion details. By prioritizing high-resolution features and uniform channel widths, Lesion-Net improves sensitivity to small lesions commonly missed by conventional designs. Experiments on ISLES 2022 and JHUS demonstrate strong performance and robustness in highly imbalanced small-lesion scenarios.
+Accurate segmentation of acute ischemic stroke remains challenging, particularly when lesion burden is low and abnormalities occupy only a small image region. Lesion-Net is a 2D hierarchical transformer framework that adapts spatial resolution, encoder depth, and channel capacity to this setting. It reduces early down-sampling, allocates greater depth to high-resolution stages, and maintains uniform channel widths, together with a lightweight multiscale decoder and feature-fusion head. Lesion-Net achieves DSC scores of 79.82% on ISLES 2022 and 77.14% on JHUS. Controlled ablations support the proposed stage allocation, while burden-stratified evaluation shows its strongest relative advantage in low-burden cases.
 
 ## Usage
 
